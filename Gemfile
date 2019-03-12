@@ -7,8 +7,6 @@ ruby '2.5.1'
 gem 'rails', '~> 5.2.2'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -39,6 +37,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3', '~> 1.3.6'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -58,6 +58,10 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+end
+
+group :production do
+  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
