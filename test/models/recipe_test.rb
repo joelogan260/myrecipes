@@ -2,7 +2,13 @@ require 'test_helper'
 
 class RecipeTest < ActiveSupport::TestCase
 	def setup
-		@recipe = Recipe.new(name: "vegetable", description: "great vegetable recipe")
+		@chef = Chef.create!(chefname: "Mashrur", email: "mashrur@example.com")
+		@recipe = @chef.recipes.build(name: "vegetable", description: "great vegetable recipe")
+	end
+
+	test "recipe without a chef should be invalid" do
+		@recipe.chef_id = nil
+		assert_not @recipe.valid?
 	end
 
 	test "recipe should be valid" do
@@ -24,7 +30,7 @@ class RecipeTest < ActiveSupport::TestCase
 		assert_not @recipe.valid?
 	end
 
-	test "description should't be momre than 500 characters" do
+	test "description should't be more than 500 characters" do
 		@recipe.description = "a" * 501
 		assert_not @recipe.valid?
 	end
